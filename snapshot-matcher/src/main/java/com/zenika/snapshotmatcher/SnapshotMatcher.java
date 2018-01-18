@@ -22,11 +22,20 @@ import difflib.DiffUtils;
 import difflib.Patch;
 
 public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
+    /**
+     * Factory method to instantiate a snapshot matcher with the given type
+     *
+     * @param <T> Type of object to snapshot
+     * @return The snapshot matcher instance
+     */
     @Factory
     public static <T> SnapshotMatcher<T> matchesSnapshot() {
         return new SnapshotMatcher<>();
     }
 
+    /**
+     * Private constructor, use factory method {@link SnapshotMatcher#matchesSnapshot()} create a new matcher
+     */
     private SnapshotMatcher() {
     }
 
@@ -46,6 +55,12 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         }
     }
 
+    /**
+     * Perform serialization of o and save result to snapshotPath
+     *
+     * @param o            Object to serialize
+     * @param snapshotPath Path to file to create
+     */
     private void createSnapshot(T o, Path snapshotPath) {
         try {
             Files.createDirectories(snapshotPath.getParent());
@@ -59,6 +74,13 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         }
     }
 
+    /**
+     * Compares snapshot at the given path with the given object
+     *
+     * @param o            Actual object to serialize then compare
+     * @param snapshotPath Path to the corresponding snapshot file
+     * @return true if snapshot matches the actual, false otherwise
+     */
     private boolean compareSnapshot(T o, Path snapshotPath) {
         try (BufferedReader reader = Files.newBufferedReader(snapshotPath, Charset.forName("UTF-8"))) {
             List<String> actual = asList(objectMapper.writeValueAsString(o).split(System.lineSeparator()));
@@ -96,6 +118,11 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         description.appendText("Object should match snapshot at " + getPath().toString());
     }
 
+    /**
+     * Find out path of the snapshot using caller name and class
+     *
+     * @return Path to the snapshot file
+     */
     private Path getPath() {
         StackTraceElement caller = getCaller();
 
@@ -105,6 +132,11 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         return Paths.get(String.format("src/test/resources/snapshots/%s/%s.json", callerClassName, callerMethodName));
     }
 
+    /**
+     * Find out caller StackTraceElement, ie. the test method which instantiated the matcher
+     *
+     * @return StackTraceElement of the test method
+     */
     private StackTraceElement getCaller() {
         final StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 

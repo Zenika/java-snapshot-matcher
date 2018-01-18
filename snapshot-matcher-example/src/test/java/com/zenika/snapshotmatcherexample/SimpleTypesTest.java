@@ -9,7 +9,7 @@ public class SimpleTypesTest {
 
     @Test
     public void testString() {
-        String s = "Mystring";
+        String s = "MyString";
 
         assertThat(s, matchesSnapshot());
     }
