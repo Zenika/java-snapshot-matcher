@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/snapshot-matcher/snapshot-matcher.iml" filepath="$PROJECT_DIR$/snapshot-matcher/snapshot-matcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/snapshot-matcher-example/snapshot-matcher-example.iml" filepath="$PROJECT_DIR$/snapshot-matcher-example/snapshot-matcher-example.iml" />
+    </modules>
+  </component>
+</project>
