@@ -1,6 +1,5 @@
 package com.zenika.snapshotmatcher;
 
-import static com.zenika.snapshotmatcher.Configuration.getRootPackageName;
 import static java.util.Arrays.asList;
 
 import java.io.BufferedReader;
@@ -12,8 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,12 +34,7 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
 
     @Override
     public boolean matchesSafely(T o) {
-        Path snapshotPath;
-        try {
-            snapshotPath = getPath();
-        } catch (MatcherException e) {
-            return false;
-        }
+        Path snapshotPath = getPath();
 
         if (Files.exists(snapshotPath)) {
             // File exists => Compare snapshot file to given object
@@ -101,14 +93,10 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
 
     @Override
     public void describeTo(Description description) {
-        try {
-            description.appendText("Object should match snapshot at " + getPath().toString());
-        } catch (MatcherException e) {
-            e.printStackTrace();
-        }
+        description.appendText("Object should match snapshot at " + getPath().toString());
     }
 
-    private Path getPath() throws MatcherException {
+    private Path getPath() {
         StackTraceElement caller = getCaller();
 
         String callerClassName = caller.getClassName();
@@ -117,16 +105,18 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         return Paths.get(String.format("src/test/resources/snapshots/%s/%s.json", callerClassName, callerMethodName));
     }
 
-    private StackTraceElement getCaller() throws MatcherException {
+    private StackTraceElement getCaller() {
         final StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        final String rootPackageName = getRootPackageName();
 
         return Stream.of(stackTraceElements)
-                .filter(stackTraceElement ->
-                        stackTraceElement.getClassName().startsWith(rootPackageName)
-                                && !stackTraceElement.getClassName().equals(getClass().getName()))
+                // Filter out java.lang package
+                .filter(stackTraceElement -> !stackTraceElement.getClassName().startsWith(Thread.class.getPackage().getName()))
+                // Filter out org.hamcrest package
+                .filter(stackTraceElement -> !stackTraceElement.getClassName().startsWith(TypeSafeMatcher.class.getPackage().getName()))
+                // Filter out current class
+                .filter(stackTraceElement -> !stackTraceElement.getClassName().equals(SnapshotMatcher.class.getName()))
                 .findFirst()
-                .orElseThrow(MatcherException::new);
+                .orElse(null);
     }
 
 }
