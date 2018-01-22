@@ -126,7 +126,7 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
     private Path getPath() {
         StackTraceElement caller = getCaller();
 
-        String callerClassName = caller.getClassName();
+        String callerClassName = caller.getClassName().replace('.', '/');
         String callerMethodName = caller.getMethodName();
 
         return Paths.get(String.format("src/test/resources/snapshots/%s/%s.json", callerClassName, callerMethodName));
