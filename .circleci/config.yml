@@ -1,0 +1,20 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8
+    steps:
+      - checkout
+      - restore_cache:
+          key: java-snapshot-matcher-{{ checksum "snapshot-matcher/pom.xml" }}-{{ checksum "snapshot-matcher-example/pom.xml" }}
+      - run: cd snapshot-matcher && mvn dependency:go-offline
+      - run: cd snapshot-matcher && mvn install
+      - run: cd snapshot-matcher-example && mvn dependency:go-offline
+      - run: cd snapshot-matcher-example && mvn test
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: java-snapshot-matcher-{{ checksum "snapshot-matcher/pom.xml" }}-{{ checksum "snapshot-matcher-example/pom.xml" }}
+      - store_test_results:
+          path: snapshot-matcher-example/target/surefire-reports
