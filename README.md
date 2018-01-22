@@ -19,5 +19,8 @@ Next executions of this test will read said file and compare with actual value.
 
 Assertion will fail if serialized values are different.
 
+We use [Jackson](https://github.com/FasterXML/jackson) to handle serialization/deserialization to JSON format.
+This library therefore can handle any object that is serializable by Jackson.
+
 ## Limitations
 - Only one snapshot assertion per test method
