@@ -1,0 +1,9 @@
+spring:
+    application:
+        name: "@project.artifactId@"
+
+starwars-api: https://swapi.co/api
+
+endpoints:
+    planets: ${starwars-api}/planets/
+
