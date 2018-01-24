@@ -145,6 +145,8 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
                 .filter(stackTraceElement -> !stackTraceElement.getClassName().startsWith(Thread.class.getPackage().getName()))
                 // Filter out org.hamcrest package
                 .filter(stackTraceElement -> !stackTraceElement.getClassName().startsWith(TypeSafeMatcher.class.getPackage().getName()))
+                // Filter out junit package
+                .filter(stackTraceElement -> !stackTraceElement.getClassName().startsWith("org.junit"))
                 // Filter out current class
                 .filter(stackTraceElement -> !stackTraceElement.getClassName().equals(SnapshotMatcher.class.getName()))
                 .findFirst()

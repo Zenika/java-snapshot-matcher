@@ -1,7 +1,5 @@
 package com.zenika.snapshotmatcherexample.starwars;
 
-import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,12 @@ public class PlanetConverter {
     @Autowired
     private RestTemplate restTemplate;
 
-    public PlanetDTO convertPlanet(Planet planet){
+    public PlanetDTO convertPlanet(Planet planet) {
         PlanetDTO dto = objectMapper.convertValue(planet, PlanetDTO.class);
 
         dto.films = planet.filmsUrls.stream()
-                        .map(filmUrl -> restTemplate.getForObject(filmUrl, FilmDTO.class))
-                        .collect(Collectors.toList());
+                .map(filmUrl -> restTemplate.getForObject(filmUrl, FilmDTO.class))
+                .collect(Collectors.toList());
 
         dto.residents = planet.residentsUrls.stream()
                 .map(filmUrl -> restTemplate.getForObject(filmUrl, PeopleDTO.class))
