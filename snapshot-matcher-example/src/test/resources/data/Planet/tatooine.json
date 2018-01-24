@@ -1,0 +1,20 @@
+{
+  "name": "Tatooine",
+  "rotation_period": "23",
+  "orbital_period": "304",
+  "diameter": "10465",
+  "climate": "arid",
+  "gravity": "1 standard",
+  "terrain": "desert",
+  "surface_water": "1",
+  "population": "200000",
+  "residents": [
+    "https://swapi.co/api/people/1/"
+  ],
+  "films": [
+    "https://swapi.co/api/films/5/"
+  ],
+  "created": "2014-12-09T13:50:49.641000Z",
+  "edited": "2014-12-21T20:48:04.175778Z",
+  "url": "https://swapi.co/api/planets/1/"
+}
