@@ -1,0 +1,36 @@
+{
+  "climate" : "arid",
+  "created" : "2014-12-09T13:50:49.641000Z",
+  "diameter" : "10465",
+  "edited" : "2014-12-21T20:48:04.175778Z",
+  "films" : [ {
+    "created" : "2014-12-20T10:57:57.886000Z",
+    "director" : "George Lucas",
+    "edited" : "2015-04-11T09:45:01.623982Z",
+    "episode_id" : 2,
+    "opening_crawl" : "There is unrest in the Galactic\r\nSenate. Several thousand solar\r\nsystems have declared their\r\nintentions to leave the Republic.\r\n\r\nThis separatist movement,\r\nunder the leadership of the\r\nmysterious Count Dooku, has\r\nmade it difficult for the limited\r\nnumber of Jedi Knights to maintain \r\npeace and order in the galaxy.\r\n\r\nSenator Amidala, the former\r\nQueen of Naboo, is returning\r\nto the Galactic Senate to vote\r\non the critical issue of creating\r\nan ARMY OF THE REPUBLIC\r\nto assist the overwhelmed\r\nJedi....",
+    "producer" : "Rick McCallum",
+    "title" : "Attack of the Clones",
+    "url" : "https://swapi.co/api/films/5/"
+  } ],
+  "gravity" : "1 standard",
+  "name" : "Tatooine",
+  "orbital_period" : "304",
+  "population" : "200000",
+  "residents" : [ {
+    "birth_year" : "19BBY",
+    "created" : "2014-12-09T13:50:51.644000Z",
+    "edited" : "2014-12-20T21:17:56.891000Z",
+    "gender" : "male",
+    "hair_color" : "blond",
+    "height" : "172",
+    "mass" : "77",
+    "name" : "Luke Skywalker",
+    "skin_color" : "fair",
+    "url" : "https://swapi.co/api/people/1/"
+  } ],
+  "rotation_period" : "23",
+  "surface_water" : "1",
+  "terrain" : "desert",
+  "url" : "https://swapi.co/api/planets/1/"
+}
