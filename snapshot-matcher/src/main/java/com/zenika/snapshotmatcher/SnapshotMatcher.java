@@ -22,6 +22,9 @@ import difflib.DiffUtils;
 import difflib.Patch;
 
 public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
+
+    private static final String SNAPSHOT_WRITE_VARIABLE = "test.snapshots.write";
+
     /**
      * Factory method to instantiate a snapshot matcher with the given type
      *
@@ -48,11 +51,14 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
         if (Files.exists(snapshotPath)) {
             // File exists => Compare snapshot file to given object
             return compareSnapshot(o, snapshotPath);
-        } else {
+        } else if (isWriteSnapshotActivated()) {
             // File doesn't exist => Create snapshot file and return true
             createSnapshot(o, snapshotPath);
             return true;
         }
+        System.out.println("Snapshot writing is not activated in this environment.");
+        System.out.println("Activate snapshot writing by using -D" + SNAPSHOT_WRITE_VARIABLE);
+        return false;
     }
 
     /**
@@ -153,4 +159,7 @@ public class SnapshotMatcher<T> extends TypeSafeMatcher<T> {
                 .orElse(null);
     }
 
+    private boolean isWriteSnapshotActivated() {
+        return System.getProperty(SNAPSHOT_WRITE_VARIABLE) != null;
+    }
 }
