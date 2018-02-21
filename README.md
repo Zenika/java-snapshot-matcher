@@ -94,7 +94,7 @@ public class PlanetConverterTest {
 ```
 
 ## Activate snapshot writing
-Snapshots must be written at the same time as the test.
+Snapshots must be written at the same time as the tests.
 It is necessary to avoid writing them in CI environments.
 
 To activate snapshot writing, pass the VM option `-Dtest.snapshots.write`.
@@ -105,7 +105,7 @@ mvn -Dtest.snapshots.write test
 ```
 
 ### With Intellij
-Set VM option inside Run configuration.
+Set VM option inside test run configuration.
 
 ![](./writesnapshot-intellij.png)
 
