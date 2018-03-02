@@ -1,6 +1,4 @@
-package utils;
-
-import static org.junit.Assert.fail;
+package com.zenika.snapshotmatcher.utils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,7 +15,7 @@ public class TestUtils {
         try {
             return objectMapper.readValue(resource, clazz);
         } catch (IOException e) {
-            fail("File not found:\n" + e.getLocalizedMessage());
+            e.printStackTrace();
             return null;
         }
     }

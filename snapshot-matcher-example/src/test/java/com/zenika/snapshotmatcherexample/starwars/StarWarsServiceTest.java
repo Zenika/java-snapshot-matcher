@@ -1,11 +1,9 @@
 package com.zenika.snapshotmatcherexample.starwars;
 
 import static com.zenika.snapshotmatcher.SnapshotMatcher.matchesSnapshot;
-import static org.junit.Assert.*;
+import static com.zenika.snapshotmatcher.utils.TestUtils.fromJson;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
-import static utils.TestUtils.fromJson;
-
-import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,8 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
