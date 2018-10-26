@@ -1,13 +1,15 @@
 package com.zenika.snapshotmatcher;
 
-import java.io.IOException;
-import java.io.Writer;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.TreeNode;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.io.IOException;
+import java.io.Writer;
 
 /**
  * Deterministic {@link ObjectMapper} to avoid unpredictable serialization
@@ -34,11 +36,16 @@ class DeterministicObjectMapper {
     }
 
     public void writeValue(Writer writer, Object o) throws IOException {
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, o);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(writer, getSnapshotableObject(o));
     }
 
     public <T> String writeValueAsString(T o) throws JsonProcessingException {
-        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(o);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(getSnapshotableObject(o));
+    }
+
+    public Object getSnapshotableObject (Object o) throws JsonProcessingException {
+        if (o instanceof JsonNode) return objectMapper.treeToValue((TreeNode) o, Object.class);
+        return o;
     }
 }
 
