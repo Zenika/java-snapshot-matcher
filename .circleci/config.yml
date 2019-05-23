@@ -11,7 +11,7 @@ jobs:
       - run: cd snapshot-matcher && mvn dependency:go-offline
       - run: cd snapshot-matcher && mvn install
       - run: cd snapshot-matcher-example && mvn dependency:go-offline
-      - run: cd snapshot-matcher-example && mvn test
+      - run: cd snapshot-matcher-example && mvn -Dsurefire.useSystemClassLoader=false test
       - save_cache:
           paths:
             - ~/.m2
