@@ -1,9 +1,9 @@
 package com.zenika.snapshotmatcherexample.starwars;
 
 import static com.zenika.snapshotmatcher.SnapshotMatcher.matchesSnapshot;
+import static com.zenika.snapshotmatcher.utils.TestUtils.fromJson;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
-import static utils.TestUtils.fromJson;
 
 import org.junit.Before;
 import org.junit.Test;
